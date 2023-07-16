@@ -206,3 +206,51 @@ Here are the steps:
    ```
 
 Remember to replace 'todo' with the name of your actual app, and '0001_initial' with the actual name of the migration you want to revert to. Always be cautious when rolling back migrations, as this can result in loss of data.
+
+### DEBUG
+   OperationalError at /admin/todo/task/
+   no such table: todo_task
+
+The error message indicates that there is no table named "todo_task" in your database. This error typically occurs when you try to access a table that hasn't been created yet or when the table has been accidentally deleted.
+
+To resolve this issue, you can follow these steps:
+
+1. Run the following command to create the necessary tables in your database:
+
+```bash
+python manage.py migrate
+```
+
+This command will apply any pending database migrations and create the required tables.
+
+2. If the migration step doesn't solve the problem, you may need to check if there are any pending migrations that haven't been applied. Run the following command to see a list of pending migrations:
+
+```bash
+python manage.py showmigrations
+```
+
+Make sure that the migration for the "todo" app is listed.
+
+3. If there are pending migrations, apply them using the following command:
+
+```bash
+python manage.py migrate <app_name>
+```
+
+Replace `<app_name>` with the actual name of your app, which in this case seems to be "todo."
+
+4. If the migrations are up to date and the table still doesn't exist, it's possible that the table was accidentally deleted. In that case, you can recreate the table by running the following command:
+
+```bash
+python manage.py makemigrations <app_name>
+```
+
+This command will generate a new migration file for the app. Then, apply the migration with:
+
+```bash
+python manage.py migrate <app_name>
+```
+
+5. If none of the above steps work, ensure that your database configuration is correctly set up in your Django project's settings file (`settings.py`). Check the database engine, name, user, password, and host to make sure they match your database setup.
+
+By following these steps, you should be able to resolve the "no such table" error and access the `/admin/todo/task/` URL without encountering the error.
