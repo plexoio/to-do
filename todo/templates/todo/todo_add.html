@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-do List</title>
+</head>
+
+<body>
+    <h1>Add Task</h1>
+
+    <form method="POST" action="add">
+        {% csrf_token %}
+        <div>
+            <p>
+                <label for="add_task">Task Name</label>
+                <input type="text" id="add_task" name="name">
+            </p>
+        </div>
+
+        <div>
+            <p>
+                <label for="completed_task">Status</label>
+                <input type="checkbox" id="completed_task" name="completed">
+            </p>
+        </div>
+
+        <div>
+            <p>
+                <button type="submit">Add Now</button>
+            </p>
+        </div>
+    </form>
+</body>
+
+</html>

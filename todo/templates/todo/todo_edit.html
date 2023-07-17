@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-do List</title>
+</head>
+
+<body>
+    <h1>Edit Task</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div>
+            <p>
+                <label for="add_task">Task Name</label>
+                <input type="text" id="add_task" name="name" value="{{ tasks.name }}">
+            </p>
+        </div>
+        {% if tasks.completed %}
+        <div>
+            <p>
+                <label for="completed_task">Status</label>
+                <input type="checkbox" id="completed_task" name="completed" checked>
+            </p>
+        </div>
+        {% else %}
+        <div>
+            <p>
+                <label for="completed_task">Status</label>
+                <input type="checkbox" id="completed_task" name="completed">
+            </p>
+        </div>
+        {% endif %}
+        <div>
+            <p>
+                <button type="submit">Update Now</button>
+            </p>
+        </div>
+    </form>
+</body>
+
+</html>

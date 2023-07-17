@@ -24,33 +24,43 @@
             {% for tasks in task %}
             <tr>
                 {% if tasks.completed %}
-                    <td>
-                        <strike>{{ tasks.name }}</strike>
-                    </td>
-                    <td>
-                        {% if tasks.completed%}
-                        <strike>DONE</strike>
-                    </td>
-                        {% endif %}
+                <td>
+                    <strike>{{ tasks.name }}</strike>
+                </td>
+                <td>
+                    <strike>DONE</strike>
+                </td>
                 {% else %}
-                    <td>
-                        {{ tasks.name }}
-                    </td>
-                    <td>
-                        {% if not tasks.completed %}
-                            PENDING
-                        {% endif %}
-                    </td>
+                <td>
+                    {{ tasks.name }}
+                </td>
+                <td>
+                    PENDING
+                </td>
                 {% endif %}
-
+                <td>
+                    <a href="{% url 'edit_task' task_id=tasks.id %}">Edit</a>
+                </td>
+                <td>
+                    <a href="{% url 'toggle_task' task_id=tasks.id %}">Toggle</a>
+                </td>
+                <td>
+                    <a href="{% url 'delete_task' task_id=tasks.id %}">Delete</a>
+                </td>
                 {% empty %}
-                    <td>
-                        Empty, nothing else to do!
-                    </td>
+                <td>
+                    Empty, nothing else to do!
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+
+    <div>
+        <p>
+            <a href="add">Add Task</a>
+        </p>
+    </div>
 </body>
 
 </html>
