@@ -1,11 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-do List</title>
 </head>
+
 <body>
     <h1>Welcome to your to-do list</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Task Name
+                </th>
+                <th>
+                    Status
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tasks in task %}
+            <tr>
+                {% if tasks.completed %}
+                    <td>
+                        <strike>{{ tasks.name }}</strike>
+                    </td>
+                    <td>
+                        {% if tasks.completed%}
+                        <strike>DONE</strike>
+                    </td>
+                        {% endif %}
+                {% else %}
+                    <td>
+                        {{ tasks.name }}
+                    </td>
+                    <td>
+                        {% if not tasks.completed %}
+                            PENDING
+                        {% endif %}
+                    </td>
+                {% endif %}
+
+                {% empty %}
+                    <td>
+                        Empty, nothing else to do!
+                    </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
+
 </html>
